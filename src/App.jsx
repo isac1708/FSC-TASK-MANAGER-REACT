@@ -1,11 +1,11 @@
+import Sidebar from "./components/Sidebar";
 
 
 
 function App() {
   return (
     <div>
-      <h1 className = "mt-02 bg-red-500 p-6">My React App</h1>
-      
+     <Sidebar />
     </div>
   );
 } 
