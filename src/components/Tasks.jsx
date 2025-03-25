@@ -14,6 +14,13 @@ const Tasks = () => {
   const morningTasks = tasks.filter((task) => task.time === "morning");
   const afternoonTasks = tasks.filter((task) => task.time === "afternoon");
   const nightTasks = tasks.filter((task) => task.time === "night");
+
+const handleTaskCheckBoxClick=( task) => {
+  console.log("task checkbox clicked", task.title);
+}
+
+
+
   return (
     <div className="w-full px-8 py-16">
       <div className="flex w-full justify-between">
@@ -43,7 +50,7 @@ const Tasks = () => {
         <div className="space-y-3">
           <TasksSeparator title="Manhã" icon={<SunIcon />} />
           {morningTasks.map((task) => (
-            <TaskItem key={task.id} task={task} />
+            <TaskItem key={task.id} task={task} handleTaskCheckBoxClick={handleTaskCheckBoxClick} />
           ))}
         </div>
 
