@@ -3,7 +3,8 @@ import LoaderIcon from "../assets/icons/LoaderIcon";
 import DetailsIcon from "../assets/icons/details.svg?react";
 
 
-const TaskItem = ({task}) => {
+
+const TaskItem = ({task,handleTaskCheckBoxClick}) => {
     const getStatusClasses=()=>{
         if(task.status === "done"){
             return "bg-[#00ADB5]   text-[#00ADB5]";
@@ -16,11 +17,15 @@ const TaskItem = ({task}) => {
         }
         
     };
-    console.log("Task status:", task.status); // Adicionado console.log aqui
-   return( <div className={`flex items-center gap-2 bg-opacity-10 px-4 py-3 rounded-xl text-sm justify-between ${getStatusClasses()}`} >
+   
+   return( <div className={`transition flex items-center gap-2 bg-opacity-10 px-4 py-3 rounded-xl text-sm justify-between ${getStatusClasses()}`} >
     <div className="flex items-center gap-2">
     <label className={`relative flex h-7 w-7 cursor-pointer items-center  justify-center rounded-lg ${getStatusClasses()}`}>
-        <input type ="checkbox" checked={task.status==="done"}  className="absolute h-full w-full curso-pointer opacity-0"/>
+        <input type ="checkbox" 
+        checked={task.status==="done"}  
+        className="absolute h-full w-full curso-pointer opacity-0"
+        onChange={() => handleTaskCheckBoxClick(task.id)}
+         />
         {task.status==="done" && <CheckIcon/>}
         {task.status==='in_progress' && <LoaderIcon className= "animate-spin"/>}
     </label>
