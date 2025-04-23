@@ -5,9 +5,13 @@ import TASKS from "../constants/tasks";
 import {useState} from "react";
 import TaskItem from "./TaskItem";
 import { toast } from "sonner";
+import AddTaskDialog from "./AddTaskDialog";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState(TASKS);
+
+  const [addTaskDialogIsOpen, setAddTaskDialogIsOpen] = useState(false);
+
   const morningTasks = tasks.filter((task) => task.time === "morning");
   const afternoonTasks = tasks.filter((task) => task.time === "afternoon");
   const nightTasks = tasks.filter((task) => task.time === "night");
@@ -60,10 +64,12 @@ const handleTaskCheckBoxClick=( taskId) => {
             <TrashIcon />
           </Button>
 
-          <Button>
+          <Button onClick={() => setAddTaskDialogIsOpen(true)} variant="primary">
             <AddIcon />
             Nova tarefa
           </Button>
+
+          <AddTaskDialog isOpen={addTaskDialogIsOpen}  />
         </div>
       </div>
 
