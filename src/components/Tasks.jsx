@@ -15,6 +15,12 @@ const Tasks = () => {
   const afternoonTasks = tasks.filter((task) => task.time === "afternoon");
   const nightTasks = tasks.filter((task) => task.time === "night");
 
+  
+   const handleTaskDeleteClick = (taskId) => { // função que filtra as tarefas e remove a tarefa que foi deletada
+     const newTasks = tasks.filter((task) => task.id !== taskId);
+     setTasks(newTasks);
+   };
+
 const handleTaskCheckBoxClick=( taskId) => {
   let newTasks = tasks.map(task =>{
     if(task.id !== taskId) return task;
@@ -66,7 +72,8 @@ const handleTaskCheckBoxClick=( taskId) => {
         <div className="space-y-3">
           <TasksSeparator title="Manhã" icon={<SunIcon />} />
           {morningTasks.map((task) => (
-            <TaskItem key={task.id} task={task} handleTaskCheckBoxClick={handleTaskCheckBoxClick} />
+            <TaskItem key={task.id} task={task} handleCheckBoxClick={handleTaskCheckBoxClick}
+            handleTaskDeleteClick={handleTaskDeleteClick} />
           ))}
         </div>
 
@@ -74,7 +81,8 @@ const handleTaskCheckBoxClick=( taskId) => {
         <div className="my-6 space-y-3">
           <TasksSeparator title="Tarde" icon={<CloudSunIcon />} />
           {afternoonTasks.map((task) => (
-            <TaskItem key={task.id} task={task} handleTaskCheckBoxClick={handleTaskCheckBoxClick} />
+            <TaskItem key={task.id} task={task} handleCheckBoxClick={handleTaskCheckBoxClick}
+            handleTaskDeleteClick={handleTaskDeleteClick} />
           ))}
         </div>
 
@@ -82,7 +90,8 @@ const handleTaskCheckBoxClick=( taskId) => {
         <div className="space-y-3">
           <TasksSeparator title="Noite" icon={<MoonIcon />} />
           {nightTasks.map((task) => (
-           <TaskItem key={task.id} task={task} handleTaskCheckBoxClick={handleTaskCheckBoxClick} />
+           <TaskItem key={task.id} task={task} handleCheckBoxClick={handleTaskCheckBoxClick} 
+           handleTaskDeleteClick={handleTaskDeleteClick}/>
           ))}
         </div>
       </div>
