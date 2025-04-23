@@ -1,7 +1,5 @@
-import CheckIcon from "../assets/icons/check.svg?react";
-import LoaderIcon from "../assets/icons/LoaderIcon";
-import DetailsIcon from "../assets/icons/details.svg?react";
-import TrashIcon from "../assets/icons/trash_icon.svg?react";
+
+import {CheckIcon,LoaderIcon,DetailsIcon,TrashIcon} from "../assets/icons";
 import Button from "../components/Button";
 
 
