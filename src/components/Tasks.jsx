@@ -8,6 +8,7 @@ import TasksSeparator from "./TasksSeparator";
 import TASKS from "../constants/tasks";
 import {useState} from "react";
 import TaskItem from "./TaskItem";
+import { toast } from "sonner";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState(TASKS);
@@ -19,6 +20,7 @@ const Tasks = () => {
    const handleTaskDeleteClick = (taskId) => { // função que filtra as tarefas e remove a tarefa que foi deletada
      const newTasks = tasks.filter((task) => task.id !== taskId);
      setTasks(newTasks);
+     toast.success("Tarefa deletada com sucesso!");
    };
 
 const handleTaskCheckBoxClick=( taskId) => {
@@ -27,12 +29,15 @@ const handleTaskCheckBoxClick=( taskId) => {
     
     // daqui pra baixo tem que atualizar o status da tarefa
     if(task.status === "not_started"){
+      toast.success("Tarefa iniciada com sucesso!");
       return {...task,status:"in_progress"}
     }
     if(task.status === "in_progress"){
+      toast.success("Tarefa concluída com sucesso!");
       return {...task,status:"done"}
     }
     if(task.status === "done"){
+      toast.success("Tarefa reiniciada com sucesso!");
       return {...task,status:"not_started"}
     }
   
@@ -72,7 +77,7 @@ const handleTaskCheckBoxClick=( taskId) => {
         <div className="space-y-3">
           <TasksSeparator title="Manhã" icon={<SunIcon />} />
           {morningTasks.map((task) => (
-            <TaskItem key={task.id} task={task} handleCheckBoxClick={handleTaskCheckBoxClick}
+            <TaskItem key={task.id} task={task} handleTaskCheckBoxClick={handleTaskCheckBoxClick}
             handleTaskDeleteClick={handleTaskDeleteClick} />
           ))}
         </div>
@@ -81,7 +86,7 @@ const handleTaskCheckBoxClick=( taskId) => {
         <div className="my-6 space-y-3">
           <TasksSeparator title="Tarde" icon={<CloudSunIcon />} />
           {afternoonTasks.map((task) => (
-            <TaskItem key={task.id} task={task} handleCheckBoxClick={handleTaskCheckBoxClick}
+            <TaskItem key={task.id} task={task} handleTaskCheckBoxClick={handleTaskCheckBoxClick}
             handleTaskDeleteClick={handleTaskDeleteClick} />
           ))}
         </div>
@@ -90,7 +95,7 @@ const handleTaskCheckBoxClick=( taskId) => {
         <div className="space-y-3">
           <TasksSeparator title="Noite" icon={<MoonIcon />} />
           {nightTasks.map((task) => (
-           <TaskItem key={task.id} task={task} handleCheckBoxClick={handleTaskCheckBoxClick} 
+           <TaskItem key={task.id} task={task} handleTaskCheckBoxClick={handleTaskCheckBoxClick} 
            handleTaskDeleteClick={handleTaskDeleteClick}/>
           ))}
         </div>
