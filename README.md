@@ -1,12 +1,43 @@
-# React + Vite
+# FSC Task Manager 📝
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and clean **daily task manager** focused on organizing tasks by **periods of the day** — morning, afternoon, and night.
 
-Currently, two official plugins are available:
+![App Screenshot](./11b6876f-927d-44c1-b510-bfc920bf146d.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 📌 Task categorization by time of day (Morning, Afternoon, Night)
+- ✅ Change task status (Not started → In progress → Done)
+- 🗑️ Delete tasks with confirmation and feedback
+- ➕ Add new tasks via dialog
+- 🔔 Visual feedback using toast notifications
+- ✨ Modern UI with clean layout and icons
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Technologies
+
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Sonner](https://sonner.emilkowal.ski/) for toast notifications
+
+## 📦 Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/isac1708/FSC-TASK-MANAGER-REACT.git
+
+# Navigate into the project folder
+cd FSC-TASK-MANAGER-REACT
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+
+Status
+🧪 Project currently in development — contributions and feedback are welcome!
+
+🙌 Credits
+Developed by @felipemotarocha
+Maintained by @isac1708
