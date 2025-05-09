@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import { createPortal } from "react-dom";
 import { CSSTransition } from "react-transition-group";
-import InputLabel from "./InputLabel";
 import "./AddTaskDialog.css";
 
 
 import Input from "./input";
 import Button from "./Button";
+import TimeSelect from "./TimeSelect";
 
 const AddTaskDialog = ({ isOpen, handleClose }) => {
   const nodeRef = useRef();
@@ -33,17 +33,8 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
           <div className="flex flex-col space-y-4 w-[336px]">
             <Input id="title" label="Título" placeholder="Insira o título da tarefa" />
 
-            <div className="flex flex-col gap-1 text-left ">
+            <TimeSelect/>
 
-              <InputLabel htmlFor="time"  >Horário</InputLabel>
-
-              <select className="px-4 py-3 border-solid border border-[#ECECEC] rounded-lg placeholder:text-sm placeholder:text-[#9A9C9F] outline-[#00ADB5]">
-                <option value="morning">Manhã</option>
-                <option value="afternoon">Tarde</option>
-                <option value="evening">Noite</option>
-              </select>
-
-            </div>
             <Input id="description" label="Descrição" placeholder="Descreva a tarefa" />
             <div className="flex gap-3">
               <Button className="w-full" size="large" variant="ghost" onClick={handleClose}>
