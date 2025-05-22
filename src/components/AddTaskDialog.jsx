@@ -11,30 +11,35 @@ import TimeSelect from "./TimeSelect";
 
 const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
   const [time, setTime] = useState();
-  const [title, setTitle] = useState("morning");
-  const [description, setDescription] = useState();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   const nodeRef = useRef();
 
 useEffect(() => {
-    if (!isOpen) {
-      setTitle("");
-      setDescription("");
-      setTime("");
-    }
-  } , [isOpen]);
+  if (!isOpen) {
+    setTitle("");
+    setDescription("");
+    setTime("");
+  }
+}, [isOpen]);
 
-  const handleSaveClick = () => {
-    handleSubmit({
-      id: v4(),
-      title,
-      description,
-      time,
-      status: "not_started",
-    });
-    handleClose();
+ const handleSaveClick = () => {
+  if (!title.trim() || !description.trim()) {
+    alert("Preencha todos os campos");
+    return;
   }
 
+  handleSubmit({
+    id: v4(),
+    title,
+    description,
+    time,
+    status: "not_started",
+  });
+
+  handleClose();
+};
   const content = (
     <CSSTransition
       in={isOpen}
