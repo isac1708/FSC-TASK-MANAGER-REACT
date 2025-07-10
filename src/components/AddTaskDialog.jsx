@@ -13,6 +13,8 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
   const [time, setTime] = useState();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [errors, setErrors] = useState([]);
+  const [submitted, setSubmitted] = useState(false); 
 
   const nodeRef = useRef();
 
@@ -21,12 +23,26 @@ useEffect(() => {
     setTitle("");
     setDescription("");
     setTime("");
+    setErrors([]);
+    setSubmitted(false);
   }
 }, [isOpen]);
 
  const handleSaveClick = () => {
-  if (!title.trim() || !description.trim()) {
-    alert("Preencha todos os campos");
+  setSubmitted(true);  
+  const newErrors = [];
+  
+  if(!title.trim()){
+    newErrors.push({inputName : "title", message :  "O título é obrigatório"});
+  }
+  if(!description.trim()){
+    newErrors.push({inputName : "description", message : "A descrição é obrigatória"});
+  }
+
+  console.log({newErrors}); 
+
+  if(newErrors.length > 0){
+    setErrors(newErrors);
     return;
   }
 
@@ -39,7 +55,13 @@ useEffect(() => {
   });
 
   handleClose();
+  
 };
+
+const titleError = errors.find(error => error.inputName === "title");
+const descriptionError = errors.find(error => error.inputName === "description");
+
+
   const content = (
     <CSSTransition
       in={isOpen}
@@ -63,15 +85,21 @@ useEffect(() => {
             <Input id="title" label="Título" placeholder="Insira o título da tarefa"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
-
+              errorMessage={submitted ? titleError?.message : undefined}
             />
+           
+           
+            
 
             <TimeSelect value={time} onChange={event => setTime(event.target.value)} />
 
             <Input id="description" label="Descrição" placeholder="Descreva a tarefa"
               value={description}
               onChange={(event) => setDescription(event.target.value)}
+              errorMessage={submitted ? descriptionError?.message : undefined}
             />
+
+          
             <div className="flex gap-3">
               <Button className="w-full" size="large" variant="ghost" onClick={handleClose}>
                 Cancelar
