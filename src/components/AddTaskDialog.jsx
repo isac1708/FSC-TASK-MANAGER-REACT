@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { CSSTransition } from "react-transition-group";
 import "./AddTaskDialog.css";
-import {v4} from "uuid";
+import { v4 } from "uuid";
 
 
 import Input from "./input";
@@ -11,55 +11,61 @@ import TimeSelect from "./TimeSelect";
 
 const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
   const [time, setTime] = useState();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+ 
+  
   const [errors, setErrors] = useState([]);
-  const [submitted, setSubmitted] = useState(false); 
+  const [submitted, setSubmitted] = useState(false);
 
   const nodeRef = useRef();
 
-useEffect(() => {
-  if (!isOpen) {
-    setTitle("");
-    setDescription("");
-    setTime("");
-    setErrors([]);
-    setSubmitted(false);
-  }
-}, [isOpen]);
+  const titleRef = useRef(null);
+  const descriptionRef = useRef(null);
 
- const handleSaveClick = () => {
-  setSubmitted(true);  
-  const newErrors = [];
-  
-  if(!title.trim()){
-    newErrors.push({inputName : "title", message :  "O título é obrigatório"});
-  }
-  if(!description.trim()){
-    newErrors.push({inputName : "description", message : "A descrição é obrigatória"});
-  }
+  useEffect(() => {
+    if (!isOpen) {
+      //setTitle("");
+     
+      setTime("");
+      setErrors([]);
+      setSubmitted(false);
+    }
+  }, [isOpen]);
 
-  console.log({newErrors}); 
+  const handleSaveClick = () => {
+    setSubmitted(true);
+    const newErrors = [];
 
-  if(newErrors.length > 0){
-    setErrors(newErrors);
-    return;
-  }
+    console.log("Título via ref:", titleRef.current?.value);
+    console.log("Descrição via ref:", descriptionRef.current?.value);
 
-  handleSubmit({
-    id: v4(),
-    title,
-    description,
-    time,
-    status: "not_started",
-  });
+    if (!titleRef.current?.value.trim()) {
+      newErrors.push({ inputName: "title", message: "O título é obrigatório" });
+    }
+    if (!descriptionRef.current?.value.trim()) {
+      newErrors.push({ inputName: "description", message: "A descrição é obrigatória" });
+    }
 
-  handleClose();
-  
-};
+    console.log({ newErrors });
 
-const titleError = errors.find(error => error.inputName === "title");
-const descriptionError = errors.find(error => error.inputName === "description");
+    if (newErrors.length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    handleSubmit({
+      id: v4(),
+      title: titleRef.current?.value,
+      description,
+      time,
+      status: "not_started",
+    });
+
+    handleClose();
+
+  };
+
+  const titleError = errors.find(error => error.inputName === "title");
+  const descriptionError = errors.find(error => error.inputName === "description");
 
 
   const content = (
@@ -82,24 +88,25 @@ const descriptionError = errors.find(error => error.inputName === "description")
             Adicione uma nova tarefa para a sua lista de tarefas
           </p>
           <div className="flex flex-col space-y-4 w-[336px]">
-            <Input id="title" label="Título" placeholder="Insira o título da tarefa"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
+            <Input
+              id="title"
+              label="Título"
+              placeholder="Insira o título da tarefa"
               errorMessage={submitted ? titleError?.message : undefined}
+              ref={titleRef}
             />
-           
-           
-            
 
             <TimeSelect value={time} onChange={event => setTime(event.target.value)} />
 
-            <Input id="description" label="Descrição" placeholder="Descreva a tarefa"
-              value={description}
-              onChange={(event) => setDescription(event.target.value)}
+            <Input
+              id="description"
+              label="Descrição"
+              placeholder="Descreva a tarefa"
               errorMessage={submitted ? descriptionError?.message : undefined}
+              ref={descriptionRef}
             />
 
-          
+
             <div className="flex gap-3">
               <Button className="w-full" size="large" variant="ghost" onClick={handleClose}>
                 Cancelar
