@@ -81,10 +81,10 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
         className="fixed left-0 backdrop-blur top-0 bottom-0 flex h-screen w-screen items-center justify-center"
       >
         <div className="p-5 rounded-xl text-center bg-white shadow">
-          <h2 className="text-[#35383E] font-semibold text-xl">
+          <h2 className="text-brand-dark-blue font-semibold text-xl">
             Adicionar nova tarefa
           </h2>
-          <p className="text-[#9A9C9F] text-sm font-normal mt-1 mb-4">
+          <p className="text-brand-text-gray text-sm font-normal mt-1 mb-4">
             Adicione uma nova tarefa para a sua lista de tarefas
           </p>
           <div className="flex flex-col space-y-4 w-[336px]">

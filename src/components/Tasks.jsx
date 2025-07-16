@@ -55,7 +55,7 @@ const Tasks = () => {
     <div className="w-full px-8 py-16 space-y-6">
       <div className="flex w-full justify-between">
         <div>
-          <span className="text-xs font-semibold text-[#00ADB5]">Minhas Tarefas</span>
+          <span className="text-xs font-semibold text-brand-primary">Minhas Tarefas</span>
           <h2 className="text-xl font-semibold">Minhas Tarefas</h2>
         </div>
 
