@@ -1,29 +1,30 @@
-const Button = ({children,variant="primary",size= "small",className, ...rest}) => {
-    const getVariantClasses = () => {
-        if (variant === "primary") {
-            return "bg-brand-primary text-white";
-        }
-        if (variant === "ghost") {
-            return "bg-transparent text-brand-dark-gray";
-        }
-        if (variant === "secondary") {
-            return "bg-brand-light-gray text-brand-dark-blue";
-        }
-        return "";
-    };
+import { tv } from "tailwind-variants";
 
-    const getSizeClasses = () => {
-        if(size==="small"){
-            return "text-xs  py-1";
-        }
-        
-        if(size==="large"){
-            return "text-lg  py-2";
-        }
-    }
-    return <button className={`rounded-md justify-center px-3 flex items-center gap-1 font-semibold hover:opacity-80 transition ${getVariantClasses()} ${getSizeClasses()} ${className}`}
-    {...rest}>
-        {children}
-    </button>;
+const Button = ({ children, color = "primary", size = "small", className, ...rest }) => {
+
+
+    const button = tv({
+        base: "rounded-md justify-center px-3 flex items-center gap-1 font-semibold hover:opacity-80 transition",
+
+        variants: {
+            color: {
+                primary: "bg-brand-primary text-white",
+                ghost: "bg-transparent text-brand-dark-gray",
+                secondary: "bg-brand-light-gray text-brand-dark-blue",
+            },
+            size: {
+                small: "text-xs py-1",
+                large: "text-lg py-2",
+            }
+        },
+        defaultVariants: {
+            color: "primary",
+            size: "small",
+        },
+
+    })
+
+    return <button className={button({ color, size,className })}  {...rest}> {children} </button>;
 };
+
 export default Button;
